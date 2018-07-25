@@ -12,6 +12,7 @@
 		5F3730972107BB1800A3EA09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F3730952107BB1800A3EA09 /* Main.storyboard */; };
 		5F3730992107BB1B00A3EA09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3730982107BB1B00A3EA09 /* Assets.xcassets */; };
 		5F37309C2107BB1B00A3EA09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F37309A2107BB1B00A3EA09 /* LaunchScreen.storyboard */; };
+		5F3730A4210841B800A3EA09 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3730A3210841B800A3EA09 /* LogInViewController.swift */; };
 		E6CC8046C44E2D502F856164 /* Pods_Tinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14790F7E6167C862D5E795F5 /* Pods_Tinder.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +25,7 @@
 		5F3730982107BB1B00A3EA09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F37309B2107BB1B00A3EA09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F37309D2107BB1B00A3EA09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F3730A3210841B800A3EA09 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		A0B866591BCCCB6B61299603 /* Pods-Tinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tinder/Pods-Tinder.release.xcconfig"; sourceTree = "<group>"; };
 		DA80EEF9BFE4877719A1F882 /* Pods-Tinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tinder/Pods-Tinder.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,6 +66,7 @@
 				5F3730912107BB1800A3EA09 /* AppDelegate.swift */,
 				5F3730932107BB1800A3EA09 /* ViewController.swift */,
 				5F3730952107BB1800A3EA09 /* Main.storyboard */,
+				5F3730A3210841B800A3EA09 /* LogInViewController.swift */,
 				5F3730982107BB1B00A3EA09 /* Assets.xcassets */,
 				5F37309A2107BB1B00A3EA09 /* LaunchScreen.storyboard */,
 				5F37309D2107BB1B00A3EA09 /* Info.plist */,
@@ -204,6 +207,7 @@
 			files = (
 				5F3730942107BB1800A3EA09 /* ViewController.swift in Sources */,
 				5F3730922107BB1800A3EA09 /* AppDelegate.swift in Sources */,
+				5F3730A4210841B800A3EA09 /* LogInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

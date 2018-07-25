@@ -115,7 +115,7 @@ class ViewController: UIViewController {
         swipeLabel.alpha = newAlphaValue
         let angle =  CGFloat(1 - newAlphaValue) * CGFloat(Float.pi/16) * rotationMultiple
         let rotation = CGAffineTransform.init(rotationAngle: angle)
-        let scale = CGFloat(0.9 + 0.1 * newAlphaValue)
+        let scale = CGFloat(0.7 + 0.3 * newAlphaValue)
         let rotationAndScale = rotation.scaledBy(x: scale, y: scale)
         swipeLabel.transform = rotationAndScale
     }
