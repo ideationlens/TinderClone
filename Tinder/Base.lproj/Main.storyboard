@@ -29,18 +29,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uj5-zg-B5G" userLabel="Swipe Label 2">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uj5-zg-B5G" userLabel="Swipe Label 2">
                                 <rect key="frame" x="26" y="173" width="300" height="300"/>
                                 <color key="backgroundColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="dAy-L3-iRA"/>
                                     <constraint firstAttribute="height" constant="300" id="etF-jA-KT2"/>
                                     <constraint firstAttribute="width" constant="300" id="lJa-5z-uEn"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="vAE-Qc-9ZT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6P-iP-Fsx">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6P-iP-Fsx">
                                 <rect key="frame" x="37.5" y="183.5" width="300" height="300"/>
                                 <color key="backgroundColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -54,13 +56,15 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="b6P-iP-Fsx" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="HHZ-Xc-T97"/>
-                            <constraint firstItem="b6P-iP-Fsx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="R1n-0S-2Qd"/>
+                            <constraint firstItem="Uj5-zg-B5G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="26" id="agp-WR-PWM"/>
+                            <constraint firstItem="Uj5-zg-B5G" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="153" id="akg-lW-CQ6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="swipeLabel" destination="b6P-iP-Fsx" id="fJM-Tb-PMI"/>
+                        <outlet property="swipeLabel1" destination="Uj5-zg-B5G" id="N2Y-mq-6bY"/>
+                        <outlet property="swipeLabel2" destination="38q-wc-SaU" id="6PZ-Uf-ukJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
