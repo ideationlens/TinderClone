@@ -484,7 +484,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="30" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tA1-Qr-9tn">
                                 <rect key="frame" x="300" y="435" width="40" height="30"/>
@@ -494,7 +494,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNC-3s-9YE">
                                 <rect key="frame" x="35" y="435" width="48" height="30"/>
@@ -556,6 +556,8 @@
                         <outlet property="genderSwitch" destination="tZN-h3-TT0" id="Rp4-1D-muy"/>
                         <outlet property="interestSwitch" destination="W9C-yd-Xmz" id="bQ4-Ci-vFb"/>
                         <outlet property="profileImageView" destination="fCj-xY-Rg3" id="7Tz-Dd-4Xv"/>
+                        <outlet property="userAgeTextField" destination="tA1-Qr-9tn" id="L1j-90-RUs"/>
+                        <outlet property="usernameTextField" destination="FCX-GU-Jbe" id="uRX-Dg-T8S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mas-y3-b5d" userLabel="First Responder" sceneMemberID="firstResponder"/>

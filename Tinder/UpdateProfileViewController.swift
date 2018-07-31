@@ -15,11 +15,15 @@ class UpdateProfileViewController: UIViewController, UIImagePickerControllerDele
     @IBOutlet weak var genderSwitch: UISwitch!
     @IBOutlet weak var interestSwitch: UISwitch!
     @IBOutlet weak var errorMessageLabel: UILabel!
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var userAgeTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         errorMessageLabel.isHidden = true
+        
+        //POPULATE VIEW WITH USER INFO
         //load user image
         if let imageData = PFUser.current()?["profilePicture1"] as? Data {
             guard let image = UIImage(data: imageData, scale: 1.0) else {fatalError("Could not format image data")}
@@ -39,6 +43,16 @@ class UpdateProfileViewController: UIViewController, UIImagePickerControllerDele
             interestSwitch.isOn = isInterestedInWomen
         }
         
+        //load username
+        if let age = PFUser.current()?["age"] as? String {
+            userAgeTextField.text = age
+        }
+        
+        
+        //load age
+        if let username = PFUser.current()?["username"] as? String {
+            userAgeTextField.text = username
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,6 +95,15 @@ class UpdateProfileViewController: UIViewController, UIImagePickerControllerDele
     }
     
     @IBAction func donePressed(_ sender: Any) {
+        
+        if let username = usernameTextField.text {
+            PFUser.current()?["username"] = username
+        }
+        
+        if let age = userAgeTextField.text {
+            PFUser.current()?["age"] = age
+        }
+        
         PFUser.current()?["isFemale"] = genderSwitch.isOn
         PFUser.current()?["isInterestedInWomen"] = interestSwitch.isOn
         saveUserData()
