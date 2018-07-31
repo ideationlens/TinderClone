@@ -40,7 +40,7 @@ class LogInViewController: UIViewController {
                 print("Sign in successful")
                 //homeSugue
                 //updateSegue
-                self.performSegue(withIdentifier: "homeSugue", sender: nil)
+                self.performSegue(withIdentifier: "updateSegue", sender: nil)
                 //Go to Home screen
                 
             } else {
@@ -63,7 +63,7 @@ class LogInViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if PFUser.current() != nil {
-            self.performSegue(withIdentifier: "homeSugue", sender: nil)
+            self.performSegue(withIdentifier: "updateSegue", sender: nil)
         }
     }
     

@@ -25,12 +25,25 @@ class UpdateProfileViewController: UIViewController, UIImagePickerControllerDele
         
         //POPULATE VIEW WITH USER INFO
         //load user image
-        if let imageData = PFUser.current()?["profilePicture1"] as? Data {
-            guard let image = UIImage(data: imageData, scale: 1.0) else {fatalError("Could not format image data")}
-            profileImageView.image = image
-            print("Loading picture")
+        if let photo = PFUser.current()?["profilePicture1"] as? PFFile {
+            photo.getDataInBackground { (data, error) in
+                if let imageData = data {
+                    guard let image = UIImage(data: imageData) else {fatalError("Could not format image data")}
+                    self.profileImageView.image = image
+                }
+            }
         } else {
-            print("Could not load image data")
+            print("Could not user profile picture")
+        }
+        
+        //load username
+        if let username = PFUser.current()?["username"] as? String {
+            usernameTextField.text = username
+        }
+        
+        //load age
+        if let age = PFUser.current()?["age"] as? String {
+            userAgeTextField.text = age
         }
         
         //load user gender
@@ -43,16 +56,7 @@ class UpdateProfileViewController: UIViewController, UIImagePickerControllerDele
             interestSwitch.isOn = isInterestedInWomen
         }
         
-        //load username
-        if let age = PFUser.current()?["age"] as? String {
-            userAgeTextField.text = age
-        }
         
-        
-        //load age
-        if let username = PFUser.current()?["username"] as? String {
-            userAgeTextField.text = username
-        }
     }
 
     override func didReceiveMemoryWarning() {
