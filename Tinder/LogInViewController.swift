@@ -38,6 +38,10 @@ class LogInViewController: UIViewController {
             if error == nil {
                 
                 print("Sign in successful")
+                //homeSugue
+                //updateSegue
+                self.performSegue(withIdentifier: "homeSugue", sender: nil)
+                //Go to Home screen
                 
             } else {
                 
@@ -57,6 +61,12 @@ class LogInViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if PFUser.current() != nil {
+            self.performSegue(withIdentifier: "homeSugue", sender: nil)
+        }
+    }
+    
     @IBAction func signUpButtonPressed(_ sender: Any) {
         
         //should check username and password before continuing
@@ -69,6 +79,8 @@ class LogInViewController: UIViewController {
             if success {
                 
                 print("Sign up successful")
+                self.performSegue(withIdentifier: "updateSegue", sender: nil)
+                //Go to Update User Profile Settings
                 
             } else {
                 
