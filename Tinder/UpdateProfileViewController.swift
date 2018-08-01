@@ -33,7 +33,7 @@ class UpdateProfileViewController: UIViewController, UIImagePickerControllerDele
                 }
             }
         } else {
-            print("Could not user profile picture")
+            print("Could not load user profile picture")
         }
         
         //load username

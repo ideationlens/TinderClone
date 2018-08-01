@@ -6,12 +6,31 @@
 //  Copyright © 2018 Douglas Putnam. All rights reserved.
 //
 
+import Parse
 import UIKit
 
 class AccountViewController: UIViewController {
 
+    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var nameAndAgeLabel: UILabel!
+    @IBOutlet weak var jobAndCompanyLabel: UILabel!
+    @IBOutlet weak var schoolLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //POPULATE VIEW WITH USER INFO
+        //load user image
+        if let photo = PFUser.current()?["profilePicture1"] as? PFFile {
+            photo.getDataInBackground { (data, error) in
+                if let imageData = data {
+                    guard let image = UIImage(data: imageData) else {fatalError("Could not format image data")}
+                    self.userImageView.image = image
+                }
+            }
+        } else {
+            print("Could not load user profile picture")
+        }
 
         // Do any additional setup after loading the view.
     }

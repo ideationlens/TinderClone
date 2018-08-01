@@ -152,17 +152,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dSx-W9-yzj" userLabel="MatchView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="553"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTv-7w-khP">
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTv-7w-khP">
                                         <rect key="frame" x="9" y="9" width="325" height="503"/>
-                                        <state key="normal" title="Button2"/>
+                                        <state key="normal" image="profile"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1t-xu-mNK" userLabel="Button1">
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m1t-xu-mNK" userLabel="Button1">
                                         <rect key="frame" x="17" y="17" width="325" height="503"/>
-                                        <state key="normal" title="Button1"/>
+                                        <state key="normal" image="profile"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfM-bF-mFt" userLabel="Button0">
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VfM-bF-mFt" userLabel="Button0">
                                         <rect key="frame" x="25" y="25" width="325" height="503"/>
-                                        <state key="normal" title="Button0"/>
+                                        <state key="normal" image="profile"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -370,6 +370,12 @@
                         <viewLayoutGuide key="safeArea" id="7QO-y6-lfc"/>
                     </view>
                     <navigationItem key="navigationItem" id="0vs-7p-dOF"/>
+                    <connections>
+                        <outlet property="jobAndCompanyLabel" destination="IBG-xg-Yc9" id="cOw-se-SCz"/>
+                        <outlet property="nameAndAgeLabel" destination="brd-98-Ozg" id="978-JR-ksX"/>
+                        <outlet property="schoolLabel" destination="RDM-9v-W8G" id="UnH-tJ-o1O"/>
+                        <outlet property="userImageView" destination="wD9-GV-tM4" id="Alp-On-gvW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e89-T1-SIh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -650,6 +656,7 @@
         <image name="account" width="15" height="15"/>
         <image name="icon-user-default" width="462" height="462"/>
         <image name="message_business_btn" width="15" height="15"/>
+        <image name="profile" width="512" height="512"/>
         <image name="signin" width="434" height="64"/>
         <image name="tinder" width="390" height="156"/>
     </resources>
