@@ -131,7 +131,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Mg-Ss-s0k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="122" y="-648"/>
+            <point key="canvasLocation" x="124" y="-648"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -157,7 +157,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6P-iP-Fsx">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6P-iP-Fsx">
                                 <rect key="frame" x="37.5" y="183.5" width="300" height="300"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -179,7 +179,13 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="NqV-ZU-g9w"/>
+                    <navigationItem key="navigationItem" id="NqV-ZU-g9w">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="wOw-Ii-Hnm">
+                            <connections>
+                                <segue destination="JmX-cp-RZC" kind="show" identifier="accountSegue" id="N5W-uZ-VGU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="swipeLabel" destination="b6P-iP-Fsx" id="fJM-Tb-PMI"/>
                         <outlet property="swipeLabel1" destination="Uj5-zg-B5G" id="N2Y-mq-6bY"/>
@@ -298,11 +304,17 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                 <state key="normal" title="SETTINGS"/>
+                                <connections>
+                                    <segue destination="K2A-vd-Tlh" kind="presentation" identifier="settingsSegue" id="SqK-La-6TB"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5Q-Ue-PRm">
                                 <rect key="frame" x="249" y="446" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="EDIT INFO"/>
+                                <connections>
+                                    <segue destination="mW3-9R-UAS" kind="custom" identifier="editInfoSegue" id="RNP-nx-yjY"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFi-XS-FNk">
                                 <rect key="frame" x="146" y="446" width="82" height="30"/>
@@ -334,10 +346,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="7QO-y6-lfc"/>
                     </view>
+                    <navigationItem key="navigationItem" id="0vs-7p-dOF"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e89-T1-SIh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1646" y="-648"/>
+            <point key="canvasLocation" x="2430" y="-648"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="gBp-cM-jo6">
@@ -352,7 +365,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2fU-CZ-CMZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2265" y="-1330"/>
+            <point key="canvasLocation" x="3204" y="-1428"/>
         </scene>
         <!--Update Profile View Controller-->
         <scene sceneID="Rmc-nQ-qcP">
@@ -461,7 +474,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Edit Info" id="fX1-0E-SXh">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="4uA-bQ-gbN">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="4uA-bQ-gbN">
                                             <connections>
                                                 <action selector="donePressed:" destination="mW3-9R-UAS" id="qCW-so-yIT"/>
                                             </connections>
@@ -557,7 +570,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mas-y3-b5d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2794" y="-648"/>
+            <point key="canvasLocation" x="3441" y="-626"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pS3-Gg-fUw">
@@ -587,5 +600,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ZEs-Zb-xwr"/>
+        <segue reference="zw9-d9-8yJ"/>
     </inferredMetricsTieBreakers>
 </document>
