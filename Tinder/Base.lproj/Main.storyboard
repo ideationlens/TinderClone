@@ -360,23 +360,29 @@
             </objects>
             <point key="canvasLocation" x="2430" y="-648"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="gBp-cM-jo6">
             <objects>
-                <viewController id="K2A-vd-Tlh" sceneMemberID="viewController">
+                <viewController id="K2A-vd-Tlh" customClass="SettingsViewController" customModule="Tinder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vgq-G3-Q6v">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yY9-DY-Kn5">
-                                <rect key="frame" x="139" y="200" width="52" height="30"/>
+                                <rect key="frame" x="161" y="318" width="52" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Log out"/>
+                                <connections>
+                                    <action selector="logoutPressed:" destination="K2A-vd-Tlh" eventType="touchUpInside" id="zQi-ue-LeA"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="iFX-Ls-Wkx"/>
                     </view>
+                    <connections>
+                        <segue destination="Mjx-uZ-HGr" kind="presentation" identifier="logoutSegue" id="JYC-Iv-qbJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2fU-CZ-CMZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
