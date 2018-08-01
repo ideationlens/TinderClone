@@ -116,6 +116,8 @@ class UpdateProfileViewController: UIViewController, UIImagePickerControllerDele
         PFUser.current()?["isFemale"] = genderSwitch.isOn
         PFUser.current()?["isInterestedInWomen"] = interestSwitch.isOn
         saveUserData()
+        
+        performSegue(withIdentifier: "homeSegue", sender: nil)
     }
     
     

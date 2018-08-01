@@ -39,6 +39,9 @@ class ViewController: UIViewController {
                                   ,y: view.bounds.height/2 - centerPointOffset * CGFloat(2)))
         centerPoint.append(CGPoint(x: view.bounds.width/2 - centerPointOffset * CGFloat(3)
                                   ,y: view.bounds.height/2 - centerPointOffset * CGFloat(3)))
+        
+        //Setup Nav Bar Items
+        setupNavBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -147,9 +150,31 @@ class ViewController: UIViewController {
             
             self.swipeLabel2.alpha = 1
         }, completion: nil)
-
         
-
+    }
+    
+    func setupNavBar() {
+        //add title icon - tinder flame logo
+        let titleImageView = UIImageView(image: #imageLiteral(resourceName: "flame"))
+        titleImageView.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
+        titleImageView.contentMode = .scaleAspectFit
+        navigationItem.titleView = titleImageView
+        
+        //add left nav bar button - account page
+        let accountButton = UIButton(type: .system)
+        accountButton.setImage(#imageLiteral(resourceName: "profile"), for: .normal)
+        accountButton.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: accountButton)
+        
+        //add right nav bar button - meesage page
+        let messageButton = UIButton(type: .system)
+        messageButton.setImage(#imageLiteral(resourceName: "message"), for: .normal)
+        messageButton.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: messageButton)
+        
+        //set background color to white
+        navigationController?.navigationBar.backgroundColor = .white
+        navigationController?.navigationBar.isTranslucent = false
     }
     
 }

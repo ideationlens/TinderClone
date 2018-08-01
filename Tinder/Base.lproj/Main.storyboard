@@ -179,7 +179,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Title" id="maO-Oa-eyG"/>
+                                    <navigationItem id="maO-Oa-eyG"/>
                                 </items>
                             </navigationBar>
                         </subviews>
@@ -369,7 +369,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-user-default" translatesAutoresizingMaskIntoConstraints="NO" id="fCj-xY-Rg3">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-user-default" translatesAutoresizingMaskIntoConstraints="NO" id="fCj-xY-Rg3">
                                 <rect key="frame" x="35" y="80" width="305" height="305"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="fCj-xY-Rg3" secondAttribute="height" multiplier="1:1" id="8um-dZ-B5f"/>
@@ -559,6 +559,7 @@
                         <outlet property="profileImageView" destination="fCj-xY-Rg3" id="7Tz-Dd-4Xv"/>
                         <outlet property="userAgeTextField" destination="tA1-Qr-9tn" id="L1j-90-RUs"/>
                         <outlet property="usernameTextField" destination="FCX-GU-Jbe" id="uRX-Dg-T8S"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="homeSegue" id="ZEs-Zb-xwr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mas-y3-b5d" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -573,4 +574,7 @@
         <image name="signin" width="434" height="64"/>
         <image name="tinder" width="390" height="156"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="ZEs-Zb-xwr"/>
+    </inferredMetricsTieBreakers>
 </document>
