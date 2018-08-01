@@ -17,16 +17,23 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         errorLabel.isHidden = true
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        continueAsCurrentUser()
+    }
+
+    // MARK: - AUTHENTICATION METHODS
+    
+    // MARK: AUTO LOGIN METHOD
+    func continueAsCurrentUser() {
+        if PFUser.current() != nil {
+            segueIntoApp()
+        }
+    }
+    
+    // MARK: PARSE LOG IN METHOD
     @IBAction func logInButtonPressed(_ sender: Any) {
         
         let user = PFUser()
@@ -37,36 +44,26 @@ class LogInViewController: UIViewController {
             
             if error == nil {
                 
-                print("Sign in successful")
-                //homeSugue
-                //updateSegue
-                self.performSegue(withIdentifier: "updateSegue", sender: nil)
-                //Go to Home screen
+                print("Sign in successful. Seguing into App next.")
+                self.segueIntoApp()
                 
             } else {
                 
                 print("Error signing in. \(error!)")
                 
                 if let currentError = error as NSError? {
-                    
                     if let errorMessage = currentError.userInfo["error"] as? String {
-                        
                         self.errorLabel.text = errorMessage
                         self.errorLabel.isHidden = false
-                        
                     }
                 }
+                
             }
         }
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        if PFUser.current() != nil {
-            self.performSegue(withIdentifier: "updateSegue", sender: nil)
-        }
-    }
-    
+    // MARK: PARSE REGISTRATION METHOD
     @IBAction func signUpButtonPressed(_ sender: Any) {
         
         //should check username and password before continuing
@@ -78,37 +75,33 @@ class LogInViewController: UIViewController {
         user.signUpInBackground { (success, error) in
             if success {
                 
-                print("Sign up successful")
+                print("Sign up successful. Next stop: UpdateProfileViewController")
                 self.performSegue(withIdentifier: "updateSegue", sender: nil)
-                //Go to Update User Profile Settings
                 
             } else {
                 
                 print("Error registering user")
-                
+        
                 if let currentError = error as NSError? {
-                    
                     if let errorMessage = currentError.userInfo["error"] as? String {
-                        
                         self.errorLabel.text = errorMessage
                         self.errorLabel.isHidden = false
-                        
                     }
                 }
+                
             }
         }
         
     }
     
+    // MARK: - NAVIGATION
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func segueIntoApp() {
+        if PFUser.current()?["isFemale"] != nil && PFUser.current()?["isInterestedInWomen"] != nil {
+            self.performSegue(withIdentifier: "homeSegue", sender: nil)
+        } else {
+            performSegue(withIdentifier: "updateSegue", sender: nil)
+        }
     }
-    */
-
+    
 }
