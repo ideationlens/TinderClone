@@ -9,7 +9,7 @@
 import Parse
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UINavigationControllerDelegate {
 
     @IBOutlet weak var swipeLabel: UILabel!
     @IBOutlet weak var swipeLabel1: UILabel!
@@ -33,8 +33,8 @@ class ViewController: UIViewController {
         //center of swipeLabel 1, 2 and 3
         centerPoint.append(CGPoint(x: view.bounds.width/2
                                   ,y: view.bounds.height/2))
-        centerPoint.append(CGPoint(x: view.bounds.width/2 - centerPointOffset
-                                  ,y: view.bounds.height/2 - centerPointOffset))
+        centerPoint.append(CGPoint(x: centerPoint[0].x - centerPointOffset
+                                  ,y: centerPoint[0].y - centerPointOffset))
         centerPoint.append(CGPoint(x: view.bounds.width/2 - centerPointOffset * CGFloat(2)
                                   ,y: view.bounds.height/2 - centerPointOffset * CGFloat(2)))
         centerPoint.append(CGPoint(x: view.bounds.width/2 - centerPointOffset * CGFloat(3)
@@ -153,28 +153,39 @@ class ViewController: UIViewController {
         
     }
     
+    // MARK: - Nav Bar Methods
     func setupNavBar() {
         //add title icon - tinder flame logo
         let titleImageView = UIImageView(image: #imageLiteral(resourceName: "flame"))
-        titleImageView.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
+        let titleImageDimensions: CGFloat = 30
+        titleImageView.frame = CGRect(x: 0, y: 0, width: titleImageDimensions, height: titleImageDimensions)
+        titleImageView.heightAnchor.constraint(equalToConstant: titleImageDimensions).isActive = true
+        titleImageView.widthAnchor.constraint(equalToConstant: titleImageDimensions).isActive = true
         titleImageView.contentMode = .scaleAspectFit
         navigationItem.titleView = titleImageView
         
         //add left nav bar button - account page
         let accountButton = UIButton(type: .system)
+        let leftButtonDimensions: CGFloat = 35
         accountButton.setImage(#imageLiteral(resourceName: "profile"), for: .normal)
-        accountButton.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
+        accountButton.frame = CGRect(x: 0, y: 0, width: leftButtonDimensions, height: leftButtonDimensions)
+        accountButton.widthAnchor.constraint(equalToConstant: leftButtonDimensions).isActive = true
+        accountButton.heightAnchor.constraint(equalToConstant: leftButtonDimensions).isActive = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: accountButton)
         
         //add right nav bar button - meesage page
         let messageButton = UIButton(type: .system)
+        let rightButtonDimensions: CGFloat = 25
         messageButton.setImage(#imageLiteral(resourceName: "message"), for: .normal)
-        messageButton.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: messageButton)
+        messageButton.frame = CGRect(x: 0, y: 0, width: rightButtonDimensions, height: rightButtonDimensions)
+        messageButton.widthAnchor.constraint(equalToConstant: rightButtonDimensions).isActive = true
+        messageButton.heightAnchor.constraint(equalToConstant: rightButtonDimensions).isActive = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: messageButton)
         
         //set background color to white
         navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
     }
     
 }
