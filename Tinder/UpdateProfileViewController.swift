@@ -37,7 +37,9 @@ class UpdateProfileViewController: UIViewController, UIImagePickerControllerDele
         }
         
         //load username
-        if let username = PFUser.current()?["username"] as? String {
+        if let profileName = PFUser.current()?["profileName"] as? String {
+            usernameTextField.text = profileName
+        } else if let username = PFUser.current()?["username"] as? String {
             usernameTextField.text = username
         }
         
@@ -56,6 +58,9 @@ class UpdateProfileViewController: UIViewController, UIImagePickerControllerDele
             interestSwitch.isOn = isInterestedInWomen
         }
         
+        
+        //Creating new users for testing purposes
+        //createWoman()
         
     }
 
@@ -101,7 +106,7 @@ class UpdateProfileViewController: UIViewController, UIImagePickerControllerDele
     @IBAction func donePressed(_ sender: Any) {
         
         if let username = usernameTextField.text {
-            PFUser.current()?["username"] = username
+            PFUser.current()?["profileName"] = username
         }
         
         if let age = userAgeTextField.text {
@@ -132,6 +137,83 @@ class UpdateProfileViewController: UIViewController, UIImagePickerControllerDele
         })
         
     }
+    
+    func createWoman() {
+        
+        var counter = 0
+        
+        let names = ["Alexa"
+                    ,"Becky"
+                    ,"Catherine"
+                    ,"Elynn"
+                    ,"Jackie"
+                    ,"Jasmine"
+                    ,"Katie"
+                    ,"Lisa"
+                    ,"Melissa"
+                    ,"Rachel"
+                    ,"Sarah"
+                    ,"Stacey"
+                    ,"Tiffany"
+                    ,"Loala"
+                    ,"Chrys"
+                    ,"Cheyenne"
+                    ,"Jennifer"
+                    ,"Lexi"
+                    ]
+        
+        
+        let imageURLs = ["https://www.nancyjophoto.com/gallery/kids/teengirlheadshot.jpg"
+                        ,"http://www.jaydjackson.com/media/cache/a6/28/a62803155c388b91e7d7568aaf6a3257.jpg"
+                        ,"https://www.robertmcgee.ca/wp-content/uploads/2016/12/actor-headshots-Toronto-2027.jpg"
+                        ,"https://img.etimg.com/thumb/msid-59878652,width-643,imgsize-122108,resizemode-4/this-new-app-will-help-you-perfect-the-art-of-taking-a-selfie.jpg"
+                        ,"http://www.jaydjackson.com/media/cache/61/db/61db9fda96be7565b70b1afb870ff9b6.jpg"
+                        ,"http://www.jaydjackson.com/media/cache/4d/de/4dde43a6f23cd0dfafb8380f9ff08bd0.jpg"
+                        ,"https://ae01.alicdn.com/kf/HTB1mh0wSVXXXXX_aXXXq6xXFXXXS.jpg"
+                        ,"https://cdn.images.dailystar.co.uk/dynamic/140/photos/264000/Cheryl-Cole-selfie-995264.jpg"
+                        ,"http://dalalnews.com/wp-content/uploads/2018/04/dalal-news-YanetGarcia6.jpg"
+                        ,"https://nbclatino.files.wordpress.com/2013/02/isaheadshot-crop.jpg"
+                        ,"https://static.makeuseof.com/wp-content/uploads/2017/07/bad-selfie-habits-670x447.jpg"
+                        ,"https://i.pinimg.com/736x/57/48/40/5748408fcb4588168e1afdb350fcf214--headshot-ideas-headshot-poses.jpg"
+                        ,"http://michaelroud.com/wp-content/uploads/2017/02/FAITH-DYER-RETOUCHES-copy-650x975.jpg"
+                        ,"https://static1.squarespace.com/static/54d942d5e4b0c4d5e7b8e4f0/54d94392e4b01f7975efddce/5acfa8e26d2a73de679ee24f/1523558680724/acting_headshots-12.jpg"
+                        ,"https://www.ajc.com/rf/image_inline/Pub/p8/AJC/2017/11/09/Images/stephe-headshot2%20(002)_2939x1839.jpg"
+                        ,"http://www.pazzaphoto.com/wp-content/uploads/2014/06/cleveland-ohio-model-headshot-photographer-pazza-photography.jpg"
+                        ]
+        
+        for imageURL in imageURLs {
+            
+            print("Counter: \(counter)")
+            if let url = URL(string: imageURL) {
+                if let data = try? Data(contentsOf: url) {
+                    if let imageFile = PFFile(name: "Photo.jpg", data: data) {
+                        
+                        print("Preparing to create new user")
+                        
+                        let user = PFUser()
+                        
+                        user["profilePicture1"] = imageFile
+                        user.username = names[counter]
+                        user.password = names[counter]
+                        user["age"] = String(counter + 20)
+                        user["isFemale"] = true
+                        user["isInterestedInWomen"] = false
+                        user["isTestAccount"] = true
+                        user.signUpInBackground { (success, error) in
+                            if success {
+                                print("New account created")
+                            }
+                        }
+                        
+                    }
+                }
+            }
+            
+            counter += 1
+        }
+        
+    }
+    
     /*
     // MARK: - Navigation
 
