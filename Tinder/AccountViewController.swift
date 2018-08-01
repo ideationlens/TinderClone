@@ -27,11 +27,11 @@ class AccountViewController: UIViewController {
     
     // MARK: - Navigation
      
-//     @IBAction func settingsButtonPressed(_ sender: Any) {
-//        
-//        performSegue(withIdentifier: "settingsSegue", sender: nil)
-//     }
-     
+     @IBAction func settingsButtonPressed(_ sender: Any) {
+        print("settingsButtonPressed on Account View Controller")
+        //performSegue(withIdentifier: "settingsSegue", sender: nil)
+     }
+    
 
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
