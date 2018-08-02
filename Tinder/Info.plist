@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We want you to match with people in your area</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Press OK to upload image from your Photo Library</string>
 	<key>NSAppTransportSecurity</key>

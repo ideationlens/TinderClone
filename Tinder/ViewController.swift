@@ -33,17 +33,17 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         
         super.viewDidLoad()
         
-        //Start looking for match candidates
+        // Start looking for match candidates
         loadMatchCandidates()
         
-        //Create matchButton gesture
+        // Create matchButton gesture
         let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(movebuttonBasedOn(gestureRecognizer:)))
         
-        //Assign gesture to matchButton
+        // Assign gesture to matchButton
         matchButton.addGestureRecognizer(gestureRecognizer)
         
-        //Determine points of reference for view
-        //center of matchButton 1, 2 and 3
+        // Determine points of reference for view
+        // Center of matchButton 1, 2 and 3
         centerPoint.append(CGPoint(x: matchView.bounds.width/2 + CGFloat(19)
                                   ,y: matchView.bounds.height/2 + CGFloat(navigationController!.navigationBar.frame.height / 1.75)))
         centerPoint.append(CGPoint(x: centerPoint[0].x - centerPointOffset
@@ -53,7 +53,18 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         centerPoint.append(CGPoint(x: centerPoint[0].x - centerPointOffset * CGFloat(3)
                                   ,y: centerPoint[0].y - centerPointOffset * CGFloat(3)))
         
-        
+        // Get users location so they can match with people in their area
+        PFGeoPoint.geoPointForCurrentLocation { (geoPoint, error) in
+            if error != nil {
+                print("Error encountered while trying to get geoPoint")
+                self.unwrapAndPrint(error: error)
+            } else {
+                if let location = geoPoint {
+                    PFUser.current()?["location"] = location
+                    PFUser.current()?.saveInBackground()
+                }
+            }
+        }
         
         //Setup Nav Bar Items
         setupNavBar()
@@ -140,11 +151,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
                     print("Match Candidate \(self.candidateCounter + 1) rejected")
                 } else {
                     //print("Error encountered while trying to save swipe to left.")
-                    if let parseError = error as NSError? {
-                        if let errorMessage = parseError.userInfo["error"] as? String {
-                            print(errorMessage)
-                        }
-                    }
+                    self.unwrapAndPrint(error: error)
                     fatalError("Error encountered while trying to save swipe to left.")
                 }
             })
@@ -180,11 +187,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
                     print("Match Candidate \(self.candidateCounter + 1) accepted")
                 } else {
                     //print("Error encountered while trying to save swipe to right.")
-                    if let parseError = error as NSError? {
-                        if let errorMessage = parseError.userInfo["error"] as? String {
-                            print(errorMessage)
-                        }
-                    }
+                    self.unwrapAndPrint(error: error)
                     fatalError("Error encountered while trying to save swipe to right action.")
                 }
             })
@@ -275,6 +278,15 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         matchButton.transform = rotationAndScale
     }
     
+    // MARK: - PAARSE METHODS
+    
+    func unwrapAndPrint(error: Error?) {
+        if let parseError = error as NSError? {
+            if let errorMessage = parseError.userInfo["error"] as? String {
+                print(errorMessage)
+            }
+        }
+    }
     
     // MARK: - Load User's Match Candidates Methods
     
