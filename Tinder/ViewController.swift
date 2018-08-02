@@ -54,17 +54,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
                                   ,y: centerPoint[0].y - centerPointOffset * CGFloat(3)))
         
         // Get users location so they can match with people in their area
-        PFGeoPoint.geoPointForCurrentLocation { (geoPoint, error) in
-            if error != nil {
-                print("Error encountered while trying to get geoPoint")
-                self.unwrapAndPrint(error: error)
-            } else {
-                if let location = geoPoint {
-                    PFUser.current()?["location"] = location
-                    PFUser.current()?.saveInBackground()
-                }
-            }
-        }
+        updateUserLocation()
         
         //Setup Nav Bar Items
         setupNavBar()
@@ -278,8 +268,25 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         matchButton.transform = rotationAndScale
     }
     
+    
     // MARK: - PAARSE METHODS
     
+    // METHOD TO UPDATE USERS GEO LOCATION
+    func updateUserLocation() {
+        PFGeoPoint.geoPointForCurrentLocation { (geoPoint, error) in
+            if error != nil {
+                print("Error encountered while trying to get geoPoint")
+                self.unwrapAndPrint(error: error)
+            } else {
+                if let location = geoPoint {
+                    PFUser.current()?["location"] = location
+                    PFUser.current()?.saveInBackground()
+                }
+            }
+        }
+    }
+    
+    // METHOD TO UNWRAP AND PRINT ERRORS RETURN FROM PARSE
     func unwrapAndPrint(error: Error?) {
         if let parseError = error as NSError? {
             if let errorMessage = parseError.userInfo["error"] as? String {
@@ -288,19 +295,19 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         }
     }
     
-    // MARK: - Load User's Match Candidates Methods
+    // MARK: - METHODS TO PRESENT MATCH CANDIDATES
     
     func loadMatchCandidates() {
         
         print("Starting to load potential matches")
         guard let query = PFUser.query() else {fatalError("Can not initiate a user query")}
         
-        //Filter for desired sex
+        // Filter for desired sex
         if let isInterestedInWomen = PFUser.current()?["isInterestedInWomen"] {
             query.whereKey("isFemale", equalTo: isInterestedInWomen)
         }
         
-        //Filter out users that have already been accepted or rejected
+        // Filter out users that have already been accepted or rejected
         var ignoredUsers: [String] = []
 
         if let acceptedUsers = PFUser.current()?["acceptedCandidates"] as? [String] {
@@ -315,14 +322,24 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         print("Filtering out \(reviewedCandidates) users")
         query.whereKey("objectId", notContainedIn: ignoredUsers)
         
+        // Filter by location
+        if let userLocation = PFUser.current()?["location"] as? PFGeoPoint {
+            if let searchDistance = PFUser.current()?["searchDistance"] as? Double {
+                query.whereKey("location", nearGeoPoint: userLocation, withinMiles: searchDistance)
+            } else {
+                query.whereKey("location", nearGeoPoint: userLocation, withinMiles: 50)
+            }
+        }
         
         //limit how many match candidates can be loaded at one time
         query.limit = 4
         
-        //Fetch query results and append results to local matchCandidates variable
+        //Fetch query results and append results to local variable (matchCandidates)
         query.findObjectsInBackground { (queryResults, error) in
             if let objects = queryResults {
+                
                 print("\(objects.count) matches found...")
+                
                 for object in objects {
                     guard let matchCandidate = object as? PFUser else {fatalError("Query result could not be cast as PFUser")}
                     self.matchCandidates.append(matchCandidate)
