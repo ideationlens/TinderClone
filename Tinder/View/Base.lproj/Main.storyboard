@@ -276,6 +276,9 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Messages"/>
+                                        <connections>
+                                            <action selector="messageButtonPressed:" destination="dkK-wX-usr" eventType="touchUpInside" id="R0D-Kw-haW"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -291,6 +294,9 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Feed"/>
+                                        <connections>
+                                            <action selector="feedButtonPressed:" destination="dkK-wX-usr" eventType="touchUpInside" id="Kvp-IC-uua"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -318,6 +324,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Y1-1V-qls"/>
                     </view>
+                    <connections>
+                        <outlet property="matchTableView" destination="hLe-YN-Z6Q" id="1cn-6W-bgb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L5n-Gq-oys" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
