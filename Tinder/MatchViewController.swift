@@ -1,15 +1,14 @@
 //
-//  SettingsViewController.swift
+//  MatchViewController.swift
 //  Tinder
 //
-//  Created by Douglas Putnam on 8/1/18.
+//  Created by Douglas Putnam on 8/3/18.
 //  Copyright © 2018 Douglas Putnam. All rights reserved.
 //
 
-import Parse
 import UIKit
 
-class SettingsViewController: UIViewController {
+class MatchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +21,7 @@ class SettingsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func logoutPressed(_ sender: Any) {
-        PFUser.logOut()
-        dismiss(animated: false, completion: nil)
-    }
-    
+
     /*
     // MARK: - Navigation
 

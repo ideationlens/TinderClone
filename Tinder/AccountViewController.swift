@@ -26,10 +26,23 @@ class AccountViewController: UIViewController {
                 if let imageData = data {
                     guard let image = UIImage(data: imageData) else {fatalError("Could not format image data")}
                     self.userImageView.image = image
+                    self.userImageView.contentMode = .scaleAspectFill
                 }
             }
         } else {
             print("Could not load user profile picture")
+        }
+        
+        // Load username
+        if let profileName = PFUser.current()?["profileName"] as? String {
+            nameAndAgeLabel.text = profileName
+        } else if let username = PFUser.current()?["username"] as? String {
+            nameAndAgeLabel.text = username
+        }
+        
+        // Load age
+        if let age = PFUser.current()?["age"] as? String {
+            nameAndAgeLabel.text = nameAndAgeLabel.text! + ", " + age
         }
 
         // Do any additional setup after loading the view.

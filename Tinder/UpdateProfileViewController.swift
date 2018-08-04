@@ -23,8 +23,8 @@ class UpdateProfileViewController: UIViewController, UIImagePickerControllerDele
         
         errorMessageLabel.isHidden = true
         
-        //POPULATE VIEW WITH USER INFO
-        //load user image
+        // POPULATE VIEW WITH USER INFO
+        // Load user image
         if let photo = PFUser.current()?["profilePicture1"] as? PFFile {
             photo.getDataInBackground { (data, error) in
                 if let imageData = data {
@@ -36,28 +36,30 @@ class UpdateProfileViewController: UIViewController, UIImagePickerControllerDele
             print("Could not load user profile picture")
         }
         
-        //load username
+        // Load username
         if let profileName = PFUser.current()?["profileName"] as? String {
             usernameTextField.text = profileName
         } else if let username = PFUser.current()?["username"] as? String {
             usernameTextField.text = username
         }
         
-        //load age
+        // Load age
         if let age = PFUser.current()?["age"] as? String {
             userAgeTextField.text = age
         }
         
-        //load user gender
+        // Load user gender
         if let isWoman = PFUser.current()?["isFemale"] as? Bool {
             genderSwitch.isOn = isWoman
         }
         
-        //load user interest
+        // Load user interest
         if let isInterestedInWomen = PFUser.current()?["isInterestedInWomen"] as? Bool {
             interestSwitch.isOn = isInterestedInWomen
         }
         
+        // Update users location
+        updateUserLocation()
         
         //Creating new users for testing purposes
         //createWoman()
@@ -117,27 +119,59 @@ class UpdateProfileViewController: UIViewController, UIImagePickerControllerDele
         PFUser.current()?["isInterestedInWomen"] = interestSwitch.isOn
         saveUserData()
         
-        performSegue(withIdentifier: "homeSegue", sender: nil)
+        dismiss(animated: true, completion: nil)
+        //performSegue(withIdentifier: "homeSegue", sender: nil)
     }
     
     
-    // MARK: - Parse Backend Methods
-    // save user data
+    // MARK: - PARSE (BACKEND) METHODS
+    
+    // METHOD TO SAVE USER DATA
     func saveUserData() {
         PFUser.current()?.saveInBackground(block: { (success, error) in
             if success {
                 print("User data has been saved")
             } else {
                 print("Error registering user")
-                if let currentError = error as NSError? {
-                    if let errorMessage = currentError.userInfo["error"] as? String {
-                        self.errorMessageLabel.text = errorMessage
-                        self.errorMessageLabel.isHidden = false
-                    }
+                if let errorMessage = self.unwrap(error: error) {
+                    self.errorMessageLabel.text = errorMessage
+                    self.errorMessageLabel.isHidden = false
                 }
             }
         })
         
+    }
+    
+    
+    // METHOD FOR UPDATING THE USERS CURRENT LOCATION
+    func updateUserLocation() {
+        PFGeoPoint.geoPointForCurrentLocation { (geoPoint, error) in
+            if error != nil {
+                print("Error encountered while trying to get geoPoint")
+                self.unwrapAndPrint(error: error)
+            } else {
+                if let location = geoPoint {
+                    PFUser.current()?["location"] = location
+                    PFUser.current()?.saveInBackground()
+                }
+            }
+        }
+    }
+    
+    // METHOD FOR UNWRAPPING AND PRINT ERRORS RETURNED BY PARSE
+    func unwrapAndPrint(error: Error?) {
+        if let message = unwrap(error: error) {
+                print(message)
+        }
+    }
+    
+    func unwrap(error: Error?) -> String? {
+        if let parseError = error as NSError? {
+            if let errorMessage = parseError.userInfo["error"] as? String {
+                return errorMessage
+            }
+        }
+        return nil
     }
     
     func createWoman() {

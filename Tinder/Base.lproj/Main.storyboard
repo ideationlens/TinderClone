@@ -136,7 +136,6 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Tinder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
@@ -215,6 +214,7 @@
                         <outlet property="matchView" destination="dSx-W9-yzj" id="rRi-4n-Eb6"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1645.5999999999999" y="133.5832083958021"/>
         </scene>
@@ -268,24 +268,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9M8-Uo-94M">
-                                <rect key="frame" x="77" y="107" width="70" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Messages"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y4I-JX-2w3">
-                                <rect key="frame" x="252" y="107" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Feed"/>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZB9-qw-RfZ">
+                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9M8-Uo-94M">
+                                        <rect key="frame" x="49" y="7" width="89" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Messages"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Qb2-ao-pqS"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dff-6X-V1w">
+                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y4I-JX-2w3">
+                                        <rect key="frame" x="72" y="7" width="44" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Feed"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="fvT-Tx-4xz"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hLe-YN-Z6Q">
+                                <rect key="frame" x="0.0" y="50" width="375" height="553"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hLe-YN-Z6Q" firstAttribute="leading" secondItem="6Y1-1V-qls" secondAttribute="leading" id="YfS-DQ-cOB"/>
+                            <constraint firstItem="dff-6X-V1w" firstAttribute="top" secondItem="6Y1-1V-qls" secondAttribute="top" id="cbR-Rc-6cE"/>
+                            <constraint firstItem="hLe-YN-Z6Q" firstAttribute="top" secondItem="ZB9-qw-RfZ" secondAttribute="bottom" id="eGH-FU-U4h"/>
+                            <constraint firstItem="dff-6X-V1w" firstAttribute="leading" secondItem="ZB9-qw-RfZ" secondAttribute="trailing" id="ea4-Qo-4lr"/>
+                            <constraint firstItem="dff-6X-V1w" firstAttribute="trailing" secondItem="6Y1-1V-qls" secondAttribute="trailing" id="kmO-V7-gsc"/>
+                            <constraint firstItem="dff-6X-V1w" firstAttribute="width" secondItem="ZB9-qw-RfZ" secondAttribute="width" id="lCD-hi-xjB"/>
+                            <constraint firstItem="ZB9-qw-RfZ" firstAttribute="top" secondItem="6Y1-1V-qls" secondAttribute="top" id="mD1-gq-R9H"/>
+                            <constraint firstItem="ZB9-qw-RfZ" firstAttribute="leading" secondItem="6Y1-1V-qls" secondAttribute="leading" id="uKG-1x-BI6"/>
+                            <constraint firstItem="hLe-YN-Z6Q" firstAttribute="bottom" secondItem="6Y1-1V-qls" secondAttribute="bottom" id="uZd-TD-8Fj"/>
+                            <constraint firstItem="hLe-YN-Z6Q" firstAttribute="trailing" secondItem="6Y1-1V-qls" secondAttribute="trailing" id="wKl-f7-YWT"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Y1-1V-qls"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L5n-Gq-oys" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1646" y="953"/>
+            <point key="canvasLocation" x="1645.5999999999999" y="952.17391304347836"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="cN9-LL-WEP">
@@ -645,6 +681,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Otf-oN-VpR"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bFM-79-l2F" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -661,7 +698,7 @@
         <image name="tinder" width="390" height="156"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BC4-W6-hlM"/>
+        <segue reference="ZEs-Zb-xwr"/>
         <segue reference="RNP-nx-yjY"/>
     </inferredMetricsTieBreakers>
 </document>

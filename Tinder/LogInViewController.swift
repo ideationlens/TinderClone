@@ -76,7 +76,7 @@ class LogInViewController: UIViewController {
             if success {
                 
                 print("Sign up successful. Next stop: UpdateProfileViewController")
-                self.performSegue(withIdentifier: "updateSegue", sender: nil)
+                self.segueIntoApp()
                 
             } else {
                 
@@ -97,6 +97,8 @@ class LogInViewController: UIViewController {
     // MARK: - NAVIGATION
     
     func segueIntoApp() {
+        usernameTextField.text = ""
+        passwordTextField.text = ""
         if PFUser.current()?["isFemale"] != nil && PFUser.current()?["isInterestedInWomen"] != nil {
             self.performSegue(withIdentifier: "homeSegue", sender: nil)
         } else {
