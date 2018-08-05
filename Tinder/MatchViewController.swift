@@ -9,32 +9,41 @@
 import Parse
 import UIKit
 
+//struct CellData {
+//    let image : UIImage?
+//    let message : String?
+//}
+
 class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var matchTableView: UITableView!
-    
-
     
     var matchCount: Int = 1
     var matches = [PFUser]()
     var matchProfilePictures = [UIImage?]()
     
-    
-
-    
+    //var data = [CellData]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // SETUP TABLE VIEW
+        
         // Table View Delegate Declaration
         matchTableView.delegate = self
+        
         // Table View Datasource Declaration
         matchTableView.dataSource = self
+        
         // Table View Custom Cell Registration
-        matchTableView.register(UINib(nibName: "MatchThreadTableViewCell", bundle: nil), forCellReuseIdentifier: "MatchThreadTableViewCell")
+        matchTableView.register(CustomMatchCell.self, forCellReuseIdentifier: "customCell")
+
         // Table View Configuration
         configureTableView()
+        
+        // Add tap gesture to match table view
+        let matchTableViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(matchTableViewTapped))
+        matchTableView.addGestureRecognizer(matchTableViewTapGesture)
         
         // LOAD MATCHES FOR TABLE VIEW
         loadUserMatches()
@@ -56,32 +65,29 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
         print("Working on cell \(indexPath.row)")
         
         // Set cell equal to customer cell - Match Thread Table View Cell
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: "MatchThreadTableViewCell",
+        let cell = matchTableView.dequeueReusableCell(
+            withIdentifier: "customCell",
             for: indexPath
-            ) as! MatchThreadTableViewCell
+            ) as! CustomMatchCell
         
         // Confirm that matches were found before trying to populate table view cells
         if matches.count > indexPath.row {
             // Set cell's image view equal to match's profile picture
             if matchProfilePictures.count > indexPath.row {
                 if let userProfilePicture = matchProfilePictures[indexPath.row] {
-                    cell.matchImageView.image = userProfilePicture
-                    cell.matchImageView.contentMode = .scaleAspectFill
-                    cell.matchImageView.heightAnchor.constraint(lessThanOrEqualToConstant: 80)
-                    cell.matchImageView.widthAnchor.constraint(lessThanOrEqualToConstant: 80)
+                    cell.mainImageView.image = userProfilePicture
                 }
             }
             // Set cell's label equal to match's profile name
             if let profileName = matches[indexPath.row]["profileName"] as? String {
-                cell.matchLabel.text = profileName
+                cell.messageView.text = profileName
                 print("Message from \(profileName)")
             } else {
                 print("Name not found")
             }
         } else {
             // Set cell's label to default
-            cell.matchLabel.text = "No matches found."
+            cell.messageView.text = "No matches found."
         }
         
         print("Done working on cell")
@@ -91,8 +97,8 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // Configure Table View
     func configureTableView() {
-        //matchTableView.rowHeight = UITableViewAutomaticDimension
-        //matchTableView.estimatedRowHeight = 80.0
+        matchTableView.rowHeight = UITableViewAutomaticDimension
+        matchTableView.estimatedRowHeight = 80.0
         matchTableView.separatorStyle = .singleLine
     }
     
@@ -148,7 +154,7 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     // Get UIImage
                     guard let image = UIImage(data: imageData) else {fatalError("Could not format image data")}
                     // Resize image
-                    let resizedImage = self.resizeImage(image: image, targetSize: CGSize(width: 70.0, height: 70.0))
+                    let resizedImage = self.resizeImage(image: image, targetSize: CGSize(width: 80.0, height: 80.0))
                     // Store image in locally
                     self.matchProfilePictures.append(resizedImage)
                     print("Finished loading picture")
@@ -201,6 +207,12 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func feedButtonPressed(_ sender: Any) {
         matchTableView.reloadData()
+    }
+    
+    
+    
+    @objc func matchTableViewTapped() {
+        print("Hello")
     }
     
     

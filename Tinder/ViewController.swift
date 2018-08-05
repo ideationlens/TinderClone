@@ -73,6 +73,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         matchButton1.imageView?.contentMode = .scaleAspectFill
         matchButton2.imageView?.contentMode = .scaleAspectFill
         
+        matchButton.isUserInteractionEnabled = false
+        
 //        print("x: \(matchButton.center.x), y: \(matchButton.center.y)")
 //        print("x: \(matchButton1.center.x), y: \(matchButton1.center.y)")
 //        print("x: \(matchButton2.center.x), y: \(matchButton2.center.y)")
@@ -359,6 +361,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         // Load top image
         if let image0 = nextMatchCandidateImage() {
             matchButton.setImage(image0, for: .normal)
+            matchButton.isUserInteractionEnabled = true
         } else {
             matchButton.alpha = 0
             //Load message - there are no new matches in your area. Try again later

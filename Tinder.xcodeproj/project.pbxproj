@@ -19,6 +19,7 @@
 		5FFFA397211553C800F3A0AB /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFFA396211553C800F3A0AB /* MatchViewController.swift */; };
 		5FFFA39B21155D4B00F3A0AB /* MatchThreadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFFA39921155D4B00F3A0AB /* MatchThreadTableViewCell.swift */; };
 		5FFFA39C21155D4B00F3A0AB /* MatchThreadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFFA39A21155D4B00F3A0AB /* MatchThreadTableViewCell.xib */; };
+		5FFFA39E211627C200F3A0AB /* CustomMatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFFA39D211627C200F3A0AB /* CustomMatchCell.swift */; };
 		E6CC8046C44E2D502F856164 /* Pods_Tinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14790F7E6167C862D5E795F5 /* Pods_Tinder.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		5FFFA396211553C800F3A0AB /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		5FFFA39921155D4B00F3A0AB /* MatchThreadTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchThreadTableViewCell.swift; sourceTree = "<group>"; };
 		5FFFA39A21155D4B00F3A0AB /* MatchThreadTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchThreadTableViewCell.xib; sourceTree = "<group>"; };
+		5FFFA39D211627C200F3A0AB /* CustomMatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMatchCell.swift; sourceTree = "<group>"; };
 		A0B866591BCCCB6B61299603 /* Pods-Tinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tinder/Pods-Tinder.release.xcconfig"; sourceTree = "<group>"; };
 		DA80EEF9BFE4877719A1F882 /* Pods-Tinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tinder/Pods-Tinder.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,6 +98,7 @@
 				5F3730952107BB1800A3EA09 /* Main.storyboard */,
 				5FFFA39921155D4B00F3A0AB /* MatchThreadTableViewCell.swift */,
 				5FFFA39A21155D4B00F3A0AB /* MatchThreadTableViewCell.xib */,
+				5FFFA39D211627C200F3A0AB /* CustomMatchCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				5FCEF6C62111F2D0000C6CAC /* AccountViewController.swift in Sources */,
 				5FFFA397211553C800F3A0AB /* MatchViewController.swift in Sources */,
 				5F68243B210F56B3002DA335 /* UpdateProfileViewController.swift in Sources */,
+				5FFFA39E211627C200F3A0AB /* CustomMatchCell.swift in Sources */,
 				5F3730922107BB1800A3EA09 /* AppDelegate.swift in Sources */,
 				5F3730A4210841B800A3EA09 /* LogInViewController.swift in Sources */,
 				5FCEF6C82111F989000C6CAC /* SettingsViewController.swift in Sources */,
