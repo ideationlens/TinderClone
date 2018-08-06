@@ -56,10 +56,6 @@ class CustomMatchCell: UITableViewCell {
         messageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         messageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
-        // Declare swipe gesture
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cellTapped))
-        messageView.addGestureRecognizer(tapGesture)
-        
     }
     
     // Populate cells with data
@@ -90,9 +86,6 @@ class CustomMatchCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    @objc func cellTapped() {
-        print("Hello")
-    }
+
 
 }

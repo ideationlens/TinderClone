@@ -15,11 +15,7 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     //var matchCount: Int = 1
     var matches = [PFUser]()
-    var matchProfilePictures = [UIImage?]()
-    
     var data = [CustomMatchCell]()
-    
-    var userSelection: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,8 +47,9 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // GO TO MESSAGE VIEW CONTROLLER WHEN USER SELECTS A MESSAGE
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Row selected = \(indexPath.row)")
         print("Next stop: MessageViewController")
-        userSelection = indexPath.row
+        
         performSegue(withIdentifier: "messageSugue", sender: nil)
     }
     
@@ -219,11 +216,16 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "messageSegue" {
+        if let indexPath = matchTableView.indexPathForSelectedRow {
+            let userSelection = indexPath.row
+            print("The selected row is \(userSelection)")
             let destinationVC = segue.destination as! MessageViewController
+            //data[userSelection].mainImage = resizeImage(image: data[userSelection].mainImage!, targetSize: CGSize(width: 30.0, height: 30.0))
             destinationVC.match = matches[userSelection]
             destinationVC.matchData = data[userSelection]
         }
+        
+        
     }
     
     
