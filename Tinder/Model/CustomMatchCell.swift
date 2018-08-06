@@ -27,7 +27,8 @@ class CustomMatchCell: UITableViewCell {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isScrollEnabled = false
         textView.isUserInteractionEnabled = false
-        textView.font = UIFont(descriptor: UIFontDescriptor(name: "Arial", size: 30), size: 30)
+        textView.font = UIFont(name: "Arial", size: 25)
+        textView.textAlignment = .justified
         return textView
     }()
     
@@ -43,8 +44,8 @@ class CustomMatchCell: UITableViewCell {
         
         // Anchor image view to the left side of the cell
         mainImageView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        mainImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        mainImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        mainImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
+        mainImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
         mainImageView.widthAnchor.constraint(equalTo: self.heightAnchor).isActive = true
         
         // Set image view to aspect fill
@@ -53,7 +54,7 @@ class CustomMatchCell: UITableViewCell {
         // Anchor messageView to the right side of the cell
         messageView.leftAnchor.constraint(equalTo: mainImageView.rightAnchor).isActive = true
         messageView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        messageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        messageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
         messageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
     }

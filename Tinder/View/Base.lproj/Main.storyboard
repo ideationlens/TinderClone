@@ -21,6 +21,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tinder" translatesAutoresizingMaskIntoConstraints="NO" id="fnt-k9-PWm">
                                 <rect key="frame" x="37" y="50" width="300" height="100"/>
+                                <color key="tintColor" red="0.85098039215686272" green="0.33333333333333331" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Bcx-F2-UlG"/>
                                     <constraint firstAttribute="width" constant="300" id="w8O-5b-kXL"/>
@@ -39,8 +40,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCt-jo-Le6">
                                 <rect key="frame" x="37" y="311" width="300" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="o4V-0r-7zK"/>
-                                    <constraint firstAttribute="height" constant="44" id="qXh-lc-QBn"/>
+                                    <constraint firstAttribute="width" constant="300" id="SbO-aM-Odh"/>
+                                    <constraint firstAttribute="height" constant="44" id="hhT-7q-VDW"/>
                                 </constraints>
                                 <state key="normal" image="signin"/>
                                 <connections>
@@ -88,10 +89,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0K-qt-y7H">
-                                <rect key="frame" x="230" y="369" width="103" height="27"/>
+                                <rect key="frame" x="234" y="368" width="103" height="27"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="27" id="ly9-py-IkU"/>
-                                    <constraint firstAttribute="width" constant="103" id="otP-pj-Zie"/>
+                                    <constraint firstAttribute="height" constant="27" id="FhB-J0-mV6"/>
+                                    <constraint firstAttribute="width" constant="103" id="xj1-yg-YzX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
                                 <state key="normal" title="Create an account."/>
@@ -105,18 +106,18 @@
                             <constraint firstItem="fnt-k9-PWm" firstAttribute="top" secondItem="IJ4-oc-Z8e" secondAttribute="top" constant="30" id="Ctw-sm-WB7"/>
                             <constraint firstItem="qFg-ME-FSF" firstAttribute="centerX" secondItem="UOg-X5-sKu" secondAttribute="centerX" id="EbY-oe-eUA"/>
                             <constraint firstItem="932-Ug-5fT" firstAttribute="centerX" secondItem="UOg-X5-sKu" secondAttribute="centerX" id="Fdh-L7-LdU"/>
-                            <constraint firstItem="mCt-jo-Le6" firstAttribute="centerX" secondItem="UOg-X5-sKu" secondAttribute="centerX" id="FyX-Gd-X7w"/>
                             <constraint firstItem="932-Ug-5fT" firstAttribute="top" secondItem="be4-Ps-0zW" secondAttribute="bottom" constant="10" id="HCe-ig-Nw5"/>
                             <constraint firstItem="be4-Ps-0zW" firstAttribute="centerX" secondItem="UOg-X5-sKu" secondAttribute="centerX" id="I0u-RD-u1d"/>
+                            <constraint firstItem="A0K-qt-y7H" firstAttribute="leading" secondItem="qFg-ME-FSF" secondAttribute="trailing" constant="5" id="Mvr-w4-jie"/>
                             <constraint firstItem="AFs-mx-heO" firstAttribute="top" secondItem="qFg-ME-FSF" secondAttribute="bottom" constant="19" id="OQZ-Rm-LWX"/>
+                            <constraint firstItem="mCt-jo-Le6" firstAttribute="centerX" secondItem="UOg-X5-sKu" secondAttribute="centerX" id="Ob2-uk-Jxu"/>
                             <constraint firstItem="o3U-4U-SiH" firstAttribute="centerX" secondItem="UOg-X5-sKu" secondAttribute="centerX" id="Uy4-45-XSd"/>
+                            <constraint firstItem="qFg-ME-FSF" firstAttribute="top" secondItem="mCt-jo-Le6" secondAttribute="bottom" constant="20" id="XHL-mW-3JJ"/>
+                            <constraint firstItem="mCt-jo-Le6" firstAttribute="top" secondItem="o3U-4U-SiH" secondAttribute="bottom" constant="23" id="Xi5-Es-RrU"/>
                             <constraint firstItem="AFs-mx-heO" firstAttribute="centerX" secondItem="UOg-X5-sKu" secondAttribute="centerX" id="ZwX-sp-bf0"/>
+                            <constraint firstItem="A0K-qt-y7H" firstAttribute="top" secondItem="mCt-jo-Le6" secondAttribute="bottom" constant="13" id="aAX-bT-Fel"/>
                             <constraint firstItem="be4-Ps-0zW" firstAttribute="top" secondItem="fnt-k9-PWm" secondAttribute="bottom" constant="30" id="e3U-sy-qoB"/>
-                            <constraint firstItem="A0K-qt-y7H" firstAttribute="top" secondItem="mCt-jo-Le6" secondAttribute="bottom" constant="14" id="lKb-o4-Hfo"/>
-                            <constraint firstItem="A0K-qt-y7H" firstAttribute="leading" secondItem="qFg-ME-FSF" secondAttribute="trailing" constant="1" id="mzP-18-FGy"/>
                             <constraint firstItem="fnt-k9-PWm" firstAttribute="centerX" secondItem="UOg-X5-sKu" secondAttribute="centerX" id="o0o-x9-IlM"/>
-                            <constraint firstItem="mCt-jo-Le6" firstAttribute="centerY" secondItem="UOg-X5-sKu" secondAttribute="centerY" id="rM6-t9-DJX"/>
-                            <constraint firstItem="qFg-ME-FSF" firstAttribute="top" secondItem="mCt-jo-Le6" secondAttribute="bottom" constant="20" id="ugd-lg-FiM"/>
                             <constraint firstItem="o3U-4U-SiH" firstAttribute="top" secondItem="932-Ug-5fT" secondAttribute="bottom" constant="8" id="wX0-nk-EcT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IJ4-oc-Z8e"/>
@@ -131,7 +132,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Mg-Ss-s0k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="124" y="-648"/>
+            <point key="canvasLocation" x="124" y="-648.12593703148434"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -410,7 +411,7 @@
                                     <constraint firstItem="GIA-1c-zZz" firstAttribute="leading" secondItem="gBO-Kw-fNv" secondAttribute="trailing" constant="5" id="vh4-rd-k7a"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bOS-dq-Y1f">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bOS-dq-Y1f">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="558"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
@@ -430,6 +431,8 @@
                     <connections>
                         <outlet property="messageTableView" destination="bOS-dq-Y1f" id="TZ2-JE-GpH"/>
                         <outlet property="newMessageView" destination="GIA-1c-zZz" id="hxK-qz-zjT"/>
+                        <outlet property="sendButton" destination="vye-7x-Wqb" id="5UJ-mj-dzD"/>
+                        <outlet property="sendMessageView" destination="szz-ph-a05" id="SYh-hS-fBY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OsV-LZ-1qm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -513,7 +516,7 @@
             <objects>
                 <viewController id="K2A-vd-Tlh" customClass="SettingsViewController" customModule="Tinder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vgq-G3-Q6v">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yY9-DY-Kn5">
@@ -791,7 +794,7 @@
         <image name="tinder" width="390" height="156"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZEs-Zb-xwr"/>
-        <segue reference="RNP-nx-yjY"/>
+        <segue reference="BC4-W6-hlM"/>
+        <segue reference="zw9-d9-8yJ"/>
     </inferredMetricsTieBreakers>
 </document>

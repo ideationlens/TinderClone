@@ -33,6 +33,11 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         
         super.viewDidLoad()
         
+        // Disable User Interface
+        matchButton.isUserInteractionEnabled = false
+        matchButton1.isUserInteractionEnabled = false
+        matchButton2.isUserInteractionEnabled = false
+        
         // Start looking for match candidates
         loadMatchCandidates()
         
@@ -72,8 +77,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         matchButton.imageView?.contentMode = .scaleAspectFill
         matchButton1.imageView?.contentMode = .scaleAspectFill
         matchButton2.imageView?.contentMode = .scaleAspectFill
-        
-        matchButton.isUserInteractionEnabled = false
         
 //        print("x: \(matchButton.center.x), y: \(matchButton.center.y)")
 //        print("x: \(matchButton1.center.x), y: \(matchButton1.center.y)")

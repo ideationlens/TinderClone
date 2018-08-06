@@ -13,8 +13,6 @@ class Message {
     var senderId : String = ""
     var recipientId : String = ""
     var message : String = ""
-    
-    
-    
-    
+    var createdDate = Date()
+
 }

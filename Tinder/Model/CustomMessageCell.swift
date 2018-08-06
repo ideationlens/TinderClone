@@ -18,7 +18,7 @@ class CustomMessageCell: UITableViewCell {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isScrollEnabled = false
         textView.isUserInteractionEnabled = false
-        textView.font = UIFont(name: "Arial", size: 18)
+        textView.font = UIFont(name: "Arial", size: 19)
         return textView
     }()
     
