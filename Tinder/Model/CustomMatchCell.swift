@@ -12,6 +12,7 @@ class CustomMatchCell: UITableViewCell {
     
     var mainImage : UIImage?
     var message : String?
+    var userId : String?
     
     // Declare and define mainImageView
     var mainImageView : UIImageView = {
@@ -26,8 +27,11 @@ class CustomMatchCell: UITableViewCell {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isScrollEnabled = false
         textView.isUserInteractionEnabled = false
+        textView.font = UIFont(descriptor: UIFontDescriptor(name: "Arial", size: 30), size: 30)
         return textView
     }()
+    
+    
     
     // Initialize cell with image view and message view
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -52,6 +56,9 @@ class CustomMatchCell: UITableViewCell {
         messageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         messageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
+        // Declare swipe gesture
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cellTapped))
+        messageView.addGestureRecognizer(tapGesture)
         
     }
     
@@ -66,6 +73,7 @@ class CustomMatchCell: UITableViewCell {
         if let mainImage = mainImage {
             mainImageView.image = mainImage
         }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -81,6 +89,10 @@ class CustomMatchCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @objc func cellTapped() {
+        print("Hello")
     }
 
 }

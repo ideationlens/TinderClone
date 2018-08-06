@@ -9,20 +9,17 @@
 import Parse
 import UIKit
 
-//struct CellData {
-//    let image : UIImage?
-//    let message : String?
-//}
-
 class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var matchTableView: UITableView!
     
-    var matchCount: Int = 1
+    //var matchCount: Int = 1
     var matches = [PFUser]()
     var matchProfilePictures = [UIImage?]()
     
-    //var data = [CellData]()
+    var data = [CustomMatchCell]()
+    
+    var userSelection: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,16 +31,13 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // Table View Datasource Declaration
         matchTableView.dataSource = self
-        
-        // Table View Custom Cell Registration
-        matchTableView.register(CustomMatchCell.self, forCellReuseIdentifier: "customCell")
 
         // Table View Configuration
         configureTableView()
         
         // Add tap gesture to match table view
-        let matchTableViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(matchTableViewTapped))
-        matchTableView.addGestureRecognizer(matchTableViewTapGesture)
+//        let matchTableViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(matchTableViewTapped))
+//        matchTableView.addGestureRecognizer(matchTableViewTapGesture)
         
         // LOAD MATCHES FOR TABLE VIEW
         loadUserMatches()
@@ -55,40 +49,29 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     // MARK: - TABLE VIEW METHODS
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Returning value \(matchCount) as the number of rows to load")
-        return matchCount
+    // GO TO MESSAGE VIEW CONTROLLER WHEN USER SELECTS A MESSAGE
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Next stop: MessageViewController")
+        userSelection = indexPath.row
+        performSegue(withIdentifier: "messageSugue", sender: nil)
     }
     
+    // TABLE VIEW DATA SOURCE - NUMBER OF ROWS
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("Returning value \(data.count) as the number of rows to load")
+        return data.count
+    }
+    
+    // TABLE VIEW DATA SOURCE - CELL FOR ROW
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         print("Working on cell \(indexPath.row)")
         
-        // Set cell equal to customer cell - Match Thread Table View Cell
-        let cell = matchTableView.dequeueReusableCell(
-            withIdentifier: "customCell",
-            for: indexPath
-            ) as! CustomMatchCell
+        // Set cell equal to custome cell - Match Thread Table View Cell
+        let cell = data[indexPath.row]
         
-        // Confirm that matches were found before trying to populate table view cells
-        if matches.count > indexPath.row {
-            // Set cell's image view equal to match's profile picture
-            if matchProfilePictures.count > indexPath.row {
-                if let userProfilePicture = matchProfilePictures[indexPath.row] {
-                    cell.mainImageView.image = userProfilePicture
-                }
-            }
-            // Set cell's label equal to match's profile name
-            if let profileName = matches[indexPath.row]["profileName"] as? String {
-                cell.messageView.text = profileName
-                print("Message from \(profileName)")
-            } else {
-                print("Name not found")
-            }
-        } else {
-            // Set cell's label to default
-            cell.messageView.text = "No matches found."
-        }
+        // Display data
+        cell.layoutSubviews()
         
         print("Done working on cell")
         
@@ -123,20 +106,43 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // Load last message date between current user and matches for sorting by recency
         
-        //Fetch query results and append results to local variable (matchCandidates)
+        //Fetch query results and append results to local variable (matchCandidates, data)
         query.findObjectsInBackground { (queryResults, error) in
             if let objects = queryResults {
                 
                 print("\(objects.count) matches found!")
-                
+                var cellDataIndex = 0
                 for object in objects {
+                    
+                    // Make sure that query result object is a user
                     guard let match = object as? PFUser else {fatalError("Query result could not be cast as PFUser")}
+                    
+                    // Save user to local variable
                     self.matches.append(match)
-                    self.getProfilePicture(forUser: match)
+                    
+                    // Extract user data: name, userId and profile picture
+                    let cellData = CustomMatchCell()
+                    if let name = match["profileName"] as? String {
+                        cellData.message = name
+                    } else if let username = match.username {
+                        cellData.message = username
+                    } else {
+                        cellData.message = "User name unavailable"
+                    }
+                    
+                    // Extract user data: userId
+                    cellData.userId = match.objectId
+                    
+                    // Append user data to local variable - data
+                    self.data.append(cellData)
+                    
+                    // Extract and save user data: profile picture
+                    self.getProfilePicture(forUser: match, withIndex: cellDataIndex)
+                    
                     print("Candidate \(object.objectId!) identified")
+                    cellDataIndex += 1
                 }
                 
-                self.matchCount = self.matches.count
                 self.matchTableView.reloadData()
             }
         }
@@ -144,29 +150,32 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     // Load Profile Images
-    func getProfilePicture(forUser user: PFUser) {
+    func getProfilePicture(forUser user: PFUser, withIndex index: Int) {
         
-        print("Working on loading profile picture for user \(user.objectId ?? "")")
+        print("Working on loading profile picture for user \(index)")
         
         if let photo = user["profilePicture1"] as? PFFile {
             photo.getDataInBackground { (data, error) in
                 if let imageData = data {
+                    
                     // Get UIImage
                     guard let image = UIImage(data: imageData) else {fatalError("Could not format image data")}
+                    
                     // Resize image
                     let resizedImage = self.resizeImage(image: image, targetSize: CGSize(width: 80.0, height: 80.0))
-                    // Store image in locally
-                    self.matchProfilePictures.append(resizedImage)
-                    print("Finished loading picture")
+                    
+                    // Store image in local variable - data
+                    self.data[index].mainImage = resizedImage
+                    
+                    print("Finished loading picture \(index)")
                     self.matchTableView.reloadData()
+                    
                 } else {
-                    self.matchProfilePictures.append(nil)
-                    print("Failed to load picture. Image data was nil")
+                    print("Failed to load picture \(index). Image data was nil")
                 }
             }
         } else {
-            print("Failed to load picture. Could not locate an image file")
-            self.matchProfilePictures.append(nil)
+            print("Failed to load picture. Could not locate image file")
         }
     }
     
@@ -209,11 +218,17 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
         matchTableView.reloadData()
     }
     
-    
-    
-    @objc func matchTableViewTapped() {
-        print("Hello")
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "messageSegue" {
+            let destinationVC = segue.destination as! MessageViewController
+            destinationVC.match = matches[userSelection]
+            destinationVC.matchData = data[userSelection]
+        }
     }
+    
+    
+    
+    
     
     
 }
