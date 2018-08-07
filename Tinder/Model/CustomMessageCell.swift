@@ -19,10 +19,12 @@ class CustomMessageCell: UITableViewCell {
         textView.isScrollEnabled = false
         textView.isUserInteractionEnabled = false
         textView.font = UIFont(name: "Arial", size: 19)
+        textView.clipsToBounds = true
+        textView.layer.cornerRadius = 10.0;
         return textView
     }()
     
-    // Initialize cell with image view and message view
+    // Initialize cell with message view
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         print("One New Message Cell Coming Up!")

@@ -9,7 +9,7 @@
 import Parse
 import UIKit
 
-class LogInViewController: UIViewController {
+class LogInViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -18,6 +18,7 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         errorLabel.isHidden = true
+        passwordTextField.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -36,6 +37,11 @@ class LogInViewController: UIViewController {
     // MARK: PARSE LOG IN METHOD
     @IBAction func logInButtonPressed(_ sender: Any) {
         
+        login()
+        
+    }
+    
+    func login() {
         let user = PFUser()
         user.username = usernameTextField.text
         user.password = passwordTextField.text
@@ -60,7 +66,6 @@ class LogInViewController: UIViewController {
                 
             }
         }
-        
     }
     
     // MARK: PARSE REGISTRATION METHOD
@@ -92,6 +97,12 @@ class LogInViewController: UIViewController {
             }
         }
         
+    }
+    
+    // MARK: - TEXT FIELD DELEGATE METHODS
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        login()
+        return true
     }
     
     // MARK: - NAVIGATION

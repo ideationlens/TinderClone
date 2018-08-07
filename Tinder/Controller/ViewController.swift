@@ -18,7 +18,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     
     var centerPoint = [CGPoint]()
     let centerPointOffset: CGFloat = 8
-    let interestMargin: CGFloat = 70
+    var interestMargin = CGFloat()
     
     var matchCandidates = [PFUser]()
     var userIds = [String]()
@@ -47,17 +47,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         // Assign gesture to matchButton
         matchButton.addGestureRecognizer(gestureRecognizer)
         
-        // Determine points of reference for view
-        // Center of matchButton 1, 2 and 3
-        centerPoint.append(CGPoint(x: matchView.bounds.width/2 + CGFloat(19)
-                                  ,y: matchView.bounds.height/2 + CGFloat(navigationController!.navigationBar.frame.height / 1.75)))
-        centerPoint.append(CGPoint(x: centerPoint[0].x - centerPointOffset
-                                  ,y: centerPoint[0].y - centerPointOffset))
-        centerPoint.append(CGPoint(x: centerPoint[0].x - centerPointOffset * CGFloat(2)
-                                  ,y: centerPoint[0].y - centerPointOffset * CGFloat(2)))
-        centerPoint.append(CGPoint(x: centerPoint[0].x - centerPointOffset * CGFloat(3)
-                                  ,y: centerPoint[0].y - centerPointOffset * CGFloat(3)))
-        
         // Get users location so they can match with people in their area
         updateUserLocation()
         
@@ -68,6 +57,21 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
 
+        interestMargin = matchView.bounds.width / 4
+        
+        // Determine points of reference for view
+        // Center of matchButton 1, 2 and 3
+        //        centerPoint.append(CGPoint(x: matchView.bounds.width/2 + CGFloat(19)
+        //                                  ,y: matchView.bounds.height/2 + CGFloat(navigationController!.navigationBar.frame.height / 1.75)))
+        centerPoint.append(CGPoint(x: matchView.bounds.width/2
+            ,y: matchView.bounds.height/2))
+        centerPoint.append(CGPoint(x: centerPoint[0].x - centerPointOffset
+            ,y: centerPoint[0].y - centerPointOffset))
+        centerPoint.append(CGPoint(x: centerPoint[0].x - centerPointOffset * CGFloat(2)
+            ,y: centerPoint[0].y - centerPointOffset * CGFloat(2)))
+        centerPoint.append(CGPoint(x: centerPoint[0].x - centerPointOffset * CGFloat(3)
+            ,y: centerPoint[0].y - centerPointOffset * CGFloat(3)))
+        
         //Initialize swipe button positions
         matchButton.center = centerPoint[0]
         matchButton1.center = centerPoint[1]
@@ -170,13 +174,14 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         
     }
     
+    // ACCEPT CANDIDATE METHODS AND MATCH EVENT HANDLING
     // Method for accepting match candidates
     func acceptMatchCandidate () {
         
         print("Accepting candidate \(candidateCounter + 1)")
         // record user's swipe to the right
-        if let userId = matchCandidates[candidateCounter].objectId {
-            PFUser.current()?.addUniqueObject(userId, forKey: "acceptedCandidates")
+        if let matchCandidateId = matchCandidates[candidateCounter].objectId {
+            PFUser.current()?.addUniqueObject(matchCandidateId, forKey: "acceptedCandidates")
             PFUser.current()?.saveInBackground(block: { (success, error) in
                 if success {
                     print("Match Candidate \(self.candidateCounter + 1) accepted")
@@ -185,6 +190,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
                     self.unwrapAndPrint(error: error)
                     fatalError("Error encountered while trying to save swipe to right action.")
                 }
+                // Check for a match
+                self.checkForAMatch(matchCandidateId: matchCandidateId)
+                
             })
         } else {
             print("Error while trying to get candidate's objectId")
@@ -206,6 +214,46 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         
     }
     
+    func checkForAMatch(matchCandidateId: String) {
+        let matchQuery = PFUser.query()
+        matchQuery?.whereKey("objectId", equalTo: matchCandidateId)
+        matchQuery?.whereKey("acceptedCandidates", contains: PFUser.current()?.objectId)
+        matchQuery?.countObjectsInBackground(block: { (count, error) in
+            if count > 0 {
+                print("It's a MATCH!!!")
+                self.presentMatchAlert()
+            }
+        })
+    }
+    
+    func presentMatchAlert() {
+        // Create the alert controller
+        let alertController = UIAlertController(title: "CONGRATULATIONS", message: "IT'S A MATCH!", preferredStyle: .alert)
+        
+        // Create the actions
+        let messageAction = UIAlertAction(title: "SEND MESSAGE", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            self.goToMatchMessage()
+            NSLog("Send me to messages!")
+        }
+        let keepSwipingAction = UIAlertAction(title: "KEEP SWIPING ", style: UIAlertActionStyle.cancel) {
+            UIAlertAction in
+            NSLog("Keep Swiping Please...")
+        }
+        
+        // Add the actions
+        alertController.addAction(messageAction)
+        alertController.addAction(keepSwipingAction)
+        
+        // Present the controller
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func goToMatchMessage() {
+    print("Next stop... messages!")
+    }
+    
+    // REJECT CANDIDATE
     //When a card is discarded, make it appear as if the deck is sliding forward into original position
     func slideImagesForward() {
         
@@ -221,7 +269,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
             transformMatchButton(newAlphaValue: 1, rotationMultiple: 0)
         
             //update middle button's (matchButton1) image then position over matchButton
-            if matchButton2.alpha == 0 {
+            if candidateCount == candidateCounter + 1 {
                 print("Setting middle button image to nil")
                 matchButton1.setImage(nil, for: .normal)
                 matchButton1.alpha = 0
@@ -272,6 +320,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         let rotationAndScale = rotation.scaledBy(x: scale, y: scale)
         matchButton.transform = rotationAndScale
     }
+    
+    
     
     
     // MARK: - PAARSE METHODS
@@ -337,7 +387,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         }
         
         //limit how many match candidates can be loaded at one time
-        query.limit = 4
+        query.limit = 3
         
         //Fetch query results and append results to local variable (matchCandidates)
         query.findObjectsInBackground { (queryResults, error) in

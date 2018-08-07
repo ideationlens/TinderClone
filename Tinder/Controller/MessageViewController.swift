@@ -138,7 +138,7 @@ class MessageViewController: UIViewController, UINavigationControllerDelegate, U
     func refreshMessages() {
         
         guard let userId = PFUser.current()?.objectId else {fatalError("Could not get current user's id to lead messages")}
-        guard let matchId = match?.objectId else {fatalError("Could not get match's id to lead messages")}
+        guard let matchId = matchData?.userId else {fatalError("Could not get match's id to lead messages")}
         
         // Create query for all messages between user and match that have not been downloaded to device
         let newMessageFromMatchQuery = PFQuery(className: "Message")
@@ -204,8 +204,10 @@ class MessageViewController: UIViewController, UINavigationControllerDelegate, U
                 }
                 
                 // Scroll to bottom of screen
-                let indexPath = IndexPath(row: self.localMessages.count-1, section: 0)
-                self.messageTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                if self.localMessages.count > 0 {
+                    let indexPath = IndexPath(row: self.localMessages.count-1, section: 0)
+                    self.messageTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                }
                 
                 
                 
@@ -293,11 +295,12 @@ class MessageViewController: UIViewController, UINavigationControllerDelegate, U
         if newMessageView.textColor == UIColor.lightGray {
             newMessageView.text = nil
             newMessageView.textColor = UIColor.black
+            
         }
-//        UIView.animate(withDuration: 0.5){
-//            self.sendMessageView.heightConstraint.constant += 258 //258 is heigh of keyboard
-//            self.sendMessageView.layoutIfNeeded()
-//        }
+        UIView.animate(withDuration: 0.5){
+            self.sendMessageView.heightAnchor.constraint(equalToConstant: self.sendMessageView.frame.height + 258).isActive = true  //258 is heigh of keyboard
+            self.sendMessageView.layoutIfNeeded()
+        }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {

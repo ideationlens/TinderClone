@@ -49,8 +49,8 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Row selected = \(indexPath.row)")
         print("Next stop: MessageViewController")
-        
         performSegue(withIdentifier: "messageSugue", sender: nil)
+        matchTableView.deselectRow(at: indexPath, animated: false)
     }
     
     // TABLE VIEW DATA SOURCE - NUMBER OF ROWS
