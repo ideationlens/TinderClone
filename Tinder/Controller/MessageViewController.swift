@@ -11,6 +11,11 @@ import UIKit
 
 class MessageViewController: UIViewController, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
 
+    @IBOutlet weak var messageTableView: UITableView!
+    @IBOutlet weak var composeMessageView: UIView!
+    @IBOutlet weak var messageTextView: UITextView!
+    @IBOutlet weak var sendButton: UIButton!
+    
     // Variable Passed in from Match View Controller
     var match : PFUser? {
         didSet {
@@ -27,10 +32,7 @@ class MessageViewController: UIViewController, UINavigationControllerDelegate, U
     
     let refreshControl = UIRefreshControl()
     
-    @IBOutlet weak var sendMessageView: UIView!
-    @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var messageTableView: UITableView!
-    @IBOutlet weak var newMessageView: UITextView!
+  
     
     var localMessages = [Message]() {
         didSet {
@@ -58,7 +60,7 @@ class MessageViewController: UIViewController, UINavigationControllerDelegate, U
         configureTableView()
         
         // SETUP MESSAGE TEXT VIEW
-        newMessageView.delegate = self
+        messageTextView.delegate = self
         resetTextMessage()
         
     }
@@ -89,7 +91,7 @@ class MessageViewController: UIViewController, UINavigationControllerDelegate, U
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        newMessageView.endEditing(true)
+        messageTextView.endEditing(true)
         messageTableView.deselectRow(at: indexPath, animated: false)
     }
     
@@ -220,16 +222,16 @@ class MessageViewController: UIViewController, UINavigationControllerDelegate, U
     func sendMessage() {
         
         // Check message before sending
-        if newMessageView.text.count > 0 {
+        if messageTextView.text.count > 0 {
             
             // Disable UI while new message is being sent
-            newMessageView.endEditing(true)
-            newMessageView.isUserInteractionEnabled = false
+            messageTextView.endEditing(true)
+            messageTextView.isUserInteractionEnabled = false
             sendButton.isEnabled = false
             
             // Stage new message
             let newMessage = Message()
-            if let messageString = newMessageView.text {
+            if let messageString = messageTextView.text {
                 newMessage.message = messageString
             } else {
                 print("")
@@ -253,12 +255,12 @@ class MessageViewController: UIViewController, UINavigationControllerDelegate, U
             parseMessage.saveInBackground { (success, error) in
                 if success {
                     
-                    // Reset text message box - newMessageView
+                    // Reset text message box - messageTextView
                     self.resetTextMessage()
                     
                     // Enable UI
-                    self.newMessageView.endEditing(false)
-                    self.newMessageView.isUserInteractionEnabled = true
+                    self.messageTextView.endEditing(false)
+                    self.messageTextView.isUserInteractionEnabled = true
                     self.sendButton.isEnabled = true
                     
                     self.refreshMessages()
@@ -268,8 +270,8 @@ class MessageViewController: UIViewController, UINavigationControllerDelegate, U
         } else {
             print("Cannot send message")
             // Enable UI
-            newMessageView.endEditing(false)
-            newMessageView.isUserInteractionEnabled = true
+            messageTextView.endEditing(false)
+            messageTextView.isUserInteractionEnabled = true
             sendButton.isEnabled = true
         }
         
@@ -281,35 +283,36 @@ class MessageViewController: UIViewController, UINavigationControllerDelegate, U
     
     // MARK: - TEXT VIEW DELEGATE METHODS
     
-    
-    // Reset text message box - newMessageView
-    func resetTextMessage() {
-        
-        newMessageView.text = "Message"
-        newMessageView.textColor = UIColor.lightGray
-        
-        
-    }
-    
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if newMessageView.textColor == UIColor.lightGray {
-            newMessageView.text = nil
-            newMessageView.textColor = UIColor.black
-            
+        // Toggle place holder
+        if messageTextView.textColor == UIColor.lightGray {
+            messageTextView.text = nil
+            messageTextView.textColor = UIColor.black
         }
-        UIView.animate(withDuration: 0.5){
-            self.sendMessageView.heightAnchor.constraint(equalToConstant: self.sendMessageView.frame.height + 258).isActive = true  //258 is heigh of keyboard
-            self.sendMessageView.layoutIfNeeded()
-        }
+        
+        // Toggle layout for keyboard
+        //UIView.animate(withDuration: 0.5){
+            composeMessageView.heightAnchor.constraint(equalToConstant: 274 + messageTextView.frame.height)  //258 is heigh of keyboard + 50 for text
+            view.layoutIfNeeded()
+        //}
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        if newMessageView.text.isEmpty {
-            textView.text = "Message"
-            textView.textColor = UIColor.lightGray
+        if messageTextView.text.isEmpty {
+            resetTextMessage()
         }
+        // Toggle layout for keyboard
+        composeMessageView.heightAnchor.constraint(equalToConstant: 16 + messageTextView.frame.height)  //258 is heigh of keyboard + 50 for text
+        view.layoutIfNeeded()
     }
     
+    // Reset text message box - messageTextView
+    func resetTextMessage() {
+        
+        messageTextView.text = "Message"
+        messageTextView.textColor = UIColor.lightGray
+        
+    }
     
     
     
@@ -337,10 +340,12 @@ class MessageViewController: UIViewController, UINavigationControllerDelegate, U
             print("Houston, we have an image")
             
             let titleImageView = UIImageView(image: image)
-            let titleImageDimensions: CGFloat = 100
+            let titleImageDimensions: CGFloat = (navigationController?.navigationBar.frame.height ?? 36) * 0.8
             titleImageView.frame = CGRect(x: 0, y: 0, width: titleImageDimensions, height: titleImageDimensions)
             titleImageView.heightAnchor.constraint(equalToConstant: titleImageDimensions).isActive = true
             titleImageView.widthAnchor.constraint(equalToConstant: titleImageDimensions).isActive = true
+            titleImageView.layer.cornerRadius = titleImageDimensions / 2
+            titleImageView.clipsToBounds = true
             titleImageView.contentMode = .scaleAspectFit
             navigationItem.titleView = titleImageView
         }

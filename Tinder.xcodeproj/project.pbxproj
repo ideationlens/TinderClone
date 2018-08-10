@@ -13,6 +13,7 @@
 		5F3730992107BB1B00A3EA09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3730982107BB1B00A3EA09 /* Assets.xcassets */; };
 		5F37309C2107BB1B00A3EA09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F37309A2107BB1B00A3EA09 /* LaunchScreen.storyboard */; };
 		5F3730A4210841B800A3EA09 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3730A3210841B800A3EA09 /* LogInViewController.swift */; };
+		5F6579FB211E336000D00A5D /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6579FA211E336000D00A5D /* keys.swift */; };
 		5F68243B210F56B3002DA335 /* UpdateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F68243A210F56B3002DA335 /* UpdateProfileViewController.swift */; };
 		5FCEF6C62111F2D0000C6CAC /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCEF6C52111F2D0000C6CAC /* AccountViewController.swift */; };
 		5FCEF6C82111F989000C6CAC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCEF6C72111F989000C6CAC /* SettingsViewController.swift */; };
@@ -34,6 +35,7 @@
 		5F37309B2107BB1B00A3EA09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F37309D2107BB1B00A3EA09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F3730A3210841B800A3EA09 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		5F6579FA211E336000D00A5D /* keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keys.swift; sourceTree = "<group>"; };
 		5F68243A210F56B3002DA335 /* UpdateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewController.swift; sourceTree = "<group>"; };
 		5FCEF6C52111F2D0000C6CAC /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		5FCEF6C72111F989000C6CAC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				5F3730912107BB1800A3EA09 /* AppDelegate.swift */,
+				5F6579FA211E336000D00A5D /* keys.swift */,
 				5FFFA39F2117AAC100F3A0AB /* Model */,
 				5FFFA39821155CE200F3A0AB /* View */,
 				5FFFA3A02117AAD900F3A0AB /* Controller */,
@@ -262,6 +265,7 @@
 				5FFFA3A62117FB3D00F3A0AB /* Message.swift in Sources */,
 				5FFFA3A42117FA1F00F3A0AB /* CustomMessageCell.swift in Sources */,
 				5F3730922107BB1800A3EA09 /* AppDelegate.swift in Sources */,
+				5F6579FB211E336000D00A5D /* keys.swift in Sources */,
 				5F3730A4210841B800A3EA09 /* LogInViewController.swift in Sources */,
 				5FCEF6C82111F989000C6CAC /* SettingsViewController.swift in Sources */,
 			);

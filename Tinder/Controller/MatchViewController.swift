@@ -50,7 +50,7 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
         print("Row selected = \(indexPath.row)")
         print("Next stop: MessageViewController")
         performSegue(withIdentifier: "messageSugue", sender: nil)
-        matchTableView.deselectRow(at: indexPath, animated: false)
+        //matchTableView.deselectRow(at: indexPath, animated: false)
     }
     
     // TABLE VIEW DATA SOURCE - NUMBER OF ROWS
@@ -220,7 +220,6 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let userSelection = indexPath.row
             print("The selected row is \(userSelection)")
             let destinationVC = segue.destination as! MessageViewController
-            //data[userSelection].mainImage = resizeImage(image: data[userSelection].mainImage!, targetSize: CGSize(width: 30.0, height: 30.0))
             destinationVC.match = matches[userSelection]
             destinationVC.matchData = data[userSelection]
         }

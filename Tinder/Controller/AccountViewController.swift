@@ -27,6 +27,8 @@ class AccountViewController: UIViewController {
                     guard let image = UIImage(data: imageData) else {fatalError("Could not format image data")}
                     self.userImageView.image = image
                     self.userImageView.contentMode = .scaleAspectFill
+                    self.userImageView.layer.cornerRadius = self.userImageView.frame.width / 2
+                    self.userImageView.clipsToBounds = true
                 }
             }
         } else {
