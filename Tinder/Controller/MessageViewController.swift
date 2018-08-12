@@ -11,7 +11,9 @@ import UIKit
 
 class MessageViewController: UIViewController, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
 
+    @IBOutlet weak var composeMessageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageTableView: UITableView!
+    @IBOutlet weak var messageTextViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var composeMessageView: UIView!
     @IBOutlet weak var messageTextView: UITextView!
     @IBOutlet weak var sendButton: UIButton!
@@ -25,7 +27,7 @@ class MessageViewController: UIViewController, UINavigationControllerDelegate, U
     // Variable Passed in from Match View Controller
     var matchData : CustomMatchCell? {
         didSet {
-            setupNavBar()
+            
             print("User accessing messages with \(matchData?.message ?? "another user")")
         }
     }
@@ -53,15 +55,15 @@ class MessageViewController: UIViewController, UINavigationControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         print("The message view did load")
+        
+        // SETUP NAV BAR
+        setupNavBar()
+        
         // SETUP TABLE VIEW
-        
-        
-        // Message Table View Configuration
         configureTableView()
         
         // SETUP MESSAGE TEXT VIEW
-        messageTextView.delegate = self
-        resetTextMessage()
+        configureMessageTextView()
         
     }
     
@@ -92,7 +94,7 @@ class MessageViewController: UIViewController, UINavigationControllerDelegate, U
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         messageTextView.endEditing(true)
-        messageTableView.deselectRow(at: indexPath, animated: false)
+        //messageTableView.deselectRow(at: indexPath, animated: false)
     }
     
     // Configure Table View
@@ -283,35 +285,55 @@ class MessageViewController: UIViewController, UINavigationControllerDelegate, U
     
     // MARK: - TEXT VIEW DELEGATE METHODS
     
+    // CONFIGURE TEXT VIEW
+    func configureMessageTextView() {
+        messageTextView.delegate = self
+        resetTextMessage()
+        messageTextView.translatesAutoresizingMaskIntoConstraints = false
+        messageTextView.isScrollEnabled = false
+    }
+    
+    // TEXT VIEW BEGIN EDITING
     func textViewDidBeginEditing(_ textView: UITextView) {
-        // Toggle place holder
+        // Toggle placeholder
         if messageTextView.textColor == UIColor.lightGray {
             messageTextView.text = nil
             messageTextView.textColor = UIColor.black
         }
-        
         // Toggle layout for keyboard
-        //UIView.animate(withDuration: 0.5){
-            composeMessageView.heightAnchor.constraint(equalToConstant: 274 + messageTextView.frame.height)  //258 is heigh of keyboard + 50 for text
-            view.layoutIfNeeded()
-        //}
+        UIView.animate(withDuration: 0.3) {
+            self.composeMessageViewHeightConstraint.constant += 263
+            self.view.layoutIfNeeded()
+        }
     }
     
+    // TEXT VIEW DID CHANGE
+    func textViewDidChange(_ textView: UITextView) {
+        print("textViewDidChange")
+        // Adjust row height
+        let size = CGSize(width: messageTextView.frame.width, height: .infinity)
+        let estimatedSize = messageTextView.sizeThatFits(size)
+        messageTextViewHeightConstraint.constant = estimatedSize.height
+        composeMessageViewHeightConstraint.constant = CGFloat(279) + estimatedSize.height
+    }
+    
+    // TEXT VIEW END EDITING
     func textViewDidEndEditing(_ textView: UITextView) {
         if messageTextView.text.isEmpty {
             resetTextMessage()
         }
         // Toggle layout for keyboard
-        composeMessageView.heightAnchor.constraint(equalToConstant: 16 + messageTextView.frame.height)  //258 is heigh of keyboard + 50 for text
-        view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3) {
+            print("Lowering ComposeMessageView")
+            self.composeMessageViewHeightConstraint.constant = CGFloat(16) + self.messageTextViewHeightConstraint.constant
+            self.view.layoutIfNeeded()
+        }
     }
     
-    // Reset text message box - messageTextView
+    // RESEST TEXT MESSAGE
     func resetTextMessage() {
-        
         messageTextView.text = "Message"
         messageTextView.textColor = UIColor.lightGray
-        
     }
     
     
